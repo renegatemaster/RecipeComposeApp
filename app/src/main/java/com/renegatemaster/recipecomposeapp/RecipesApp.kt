@@ -1,14 +1,18 @@
 package com.renegatemaster.recipecomposeapp
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.renegatemaster.recipecomposeapp.ui.navigation.BottomNavigation
 import com.renegatemaster.recipecomposeapp.ui.theme.RecipeComposeAppTheme
 import com.renegatemaster.recipecomposeapp.ui.theme.recipesAppTypography
 
@@ -17,14 +21,20 @@ fun RecipesApp() {
     RecipeComposeAppTheme(
         typography = recipesAppTypography,
     ) {
-        Scaffold ()
-        { innerPadding ->
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
-                Greeting(
-                    name = "Android",
+        var state by remember { mutableStateOf(AppScreens.CATEGORIES) }
+        Scaffold(bottomBar = {
+            BottomNavigation(
+                onCategoriesClick = { state = AppScreens.CATEGORIES },
+                onFavoritesClick = { state = AppScreens.FAVORITES },
+            )
+        }
+        ) { innerPadding ->
+            when (state) {
+                AppScreens.CATEGORIES -> Categories(
+                    modifier = Modifier.padding(innerPadding)
+                )
+
+                AppScreens.FAVORITES -> Favorites(
                     modifier = Modifier.padding(innerPadding)
                 )
             }
@@ -33,32 +43,19 @@ fun RecipesApp() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Column {
-        Text(
-            text = "Hello $name!",
-            modifier = modifier,
-            style = recipesAppTypography.displayLarge
-        )
-        Text(
-            text = "Hello $name!",
-            modifier = modifier,
-            style = recipesAppTypography.titleMedium
-        )
-        Text(
-            text = "Hello $name!",
-            modifier = modifier,
-            style = recipesAppTypography.bodyMedium
-        )
-        Text(
-            text = "Hello $name!",
-            modifier = modifier,
-            style = recipesAppTypography.bodySmall
-        )
-        Text(
-            text = "Hello $name!",
-            modifier = modifier,
-            style = recipesAppTypography.labelLarge
-        )
+private fun Categories(modifier: Modifier) {
+    Box(
+        modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
+    ) {
+        Text(text = "Categories", modifier = modifier)
+    }
+}
+
+@Composable
+private fun Favorites(modifier: Modifier) {
+    Box(
+        modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
+    ) {
+        Text(text = "Favorites", modifier = modifier)
     }
 }
