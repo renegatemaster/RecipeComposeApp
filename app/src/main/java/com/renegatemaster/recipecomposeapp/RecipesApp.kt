@@ -12,6 +12,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.renegatemaster.recipecomposeapp.ui.categories.CategoriesScreen
 import com.renegatemaster.recipecomposeapp.ui.navigation.BottomNavigation
 import com.renegatemaster.recipecomposeapp.ui.theme.RecipeComposeAppTheme
 import com.renegatemaster.recipecomposeapp.ui.theme.recipesAppTypography
@@ -30,11 +31,11 @@ fun RecipesApp() {
         }
         ) { innerPadding ->
             when (state) {
-                AppScreens.CATEGORIES -> Categories(
+                AppScreens.CATEGORIES -> CategoriesScreen(
                     modifier = Modifier.padding(innerPadding)
                 )
 
-                AppScreens.FAVORITES -> Favorites(
+                AppScreens.FAVORITES -> FavoritesScreen(
                     modifier = Modifier.padding(innerPadding)
                 )
             }
@@ -43,16 +44,7 @@ fun RecipesApp() {
 }
 
 @Composable
-private fun Categories(modifier: Modifier) {
-    Box(
-        modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
-    ) {
-        Text(text = "Categories", modifier = modifier)
-    }
-}
-
-@Composable
-private fun Favorites(modifier: Modifier) {
+private fun FavoritesScreen(modifier: Modifier) {
     Box(
         modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
     ) {
