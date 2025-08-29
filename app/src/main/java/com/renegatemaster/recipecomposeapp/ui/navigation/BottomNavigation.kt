@@ -4,12 +4,17 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.dimensionResource
+import com.renegatemaster.recipecomposeapp.R
 
 @Composable
 fun BottomNavigation(
@@ -17,15 +22,51 @@ fun BottomNavigation(
     onFavoritesClick: () -> Unit,
 ) {
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .padding(dimensionResource(R.dimen.halfBasicIndentation)),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Button(onClick = onCategoriesClick, modifier = Modifier.padding(16.dp)) {
-            Text("Categories")
+        Button(
+            onClick = onCategoriesClick,
+            modifier = Modifier
+                .padding(
+                    start = dimensionResource(R.dimen.halfBasicIndentation),
+                    end = dimensionResource(R.dimen.quarterBasicIndentation)
+                )
+                .weight(1f),
+            shape = RoundedCornerShape(
+                dimensionResource(R.dimen.halfBasicIndentation)
+            ),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.primary
+            ),
+        ) {
+            Text(
+                text = "categories".uppercase(),
+                style = MaterialTheme.typography.headlineMedium,
+            )
         }
-        Button(onClick = onFavoritesClick, modifier = Modifier.padding(16.dp)) {
-            Text("Favorites")
+        Button(
+            onClick = onFavoritesClick,
+            modifier = Modifier
+                .padding(
+                    end = dimensionResource(R.dimen.halfBasicIndentation),
+                )
+                .weight(1f),
+            shape = RoundedCornerShape(
+                dimensionResource(R.dimen.halfBasicIndentation)
+            ),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.secondary
+            ),
+        ) {
+            Text(
+                text = "favorites".uppercase(),
+                style = MaterialTheme.typography.headlineMedium,
+            )
         }
     }
 }

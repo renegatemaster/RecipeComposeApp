@@ -1,4 +1,4 @@
-package com.renegatemaster.recipecomposeapp.ui.categories
+package com.renegatemaster.recipecomposeapp.ui.favorites
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,15 +14,15 @@ import com.renegatemaster.recipecomposeapp.ui.theme.RecipeComposeAppTheme
 import com.renegatemaster.recipecomposeapp.ui.theme.recipesAppTypography
 
 @Composable
-fun CategoriesScreen(modifier: Modifier) {
+fun FavoritesScreen(modifier: Modifier) {
     Column(
         modifier = modifier.fillMaxSize()
     ) {
         ScreenHeader(
-            header = "categories",
-            imageRes = R.drawable.bcg_categories
+            header = "favorites",
+            imageRes = R.drawable.bcg_favorites
         )
-        ScreenBody("There is no categories yet")
+        ScreenBody("There is no favorites yet")
     }
 }
 
@@ -34,7 +34,7 @@ fun CategoriesScreenPreview() {
     ) {
         Scaffold() { innerPadding ->
             val modifier = Modifier.padding(innerPadding)
-            CategoriesScreen(modifier)
+            FavoritesScreen(modifier)
         }
     }
 }
