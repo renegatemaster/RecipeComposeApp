@@ -115,4 +115,10 @@ object RecipesRepositoryStub {
             emptyList<RecipeDto>()
         }
     }
+
+    fun getCategoryByRecipeId(recipeId: Int): String {
+        return if (recipeId in burgerRecipes.map { it.id }) {
+            "Бургеры"
+        } else ""
+    }
 }
