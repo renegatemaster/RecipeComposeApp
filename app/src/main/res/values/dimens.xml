@@ -3,5 +3,10 @@
     <dimen name="basicIndentation">16dp</dimen>
     <dimen name="halfBasicIndentation">8dp</dimen>
     <dimen name="quarterBasicIndentation">4dp</dimen>
+
+    <dimen name="basicCornerRadius">16dp</dimen>
+    <dimen name="halfBasicCornerRadius">8dp</dimen>
+
     <dimen name="headerPadding">10dp</dimen>
+    <dimen name="cardHeaderPadding">8dp</dimen>
 </resources>

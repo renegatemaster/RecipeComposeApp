@@ -8,17 +8,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import com.renegatemaster.recipecomposeapp.data.repository.RecipesRepositoryStub
 import com.renegatemaster.recipecomposeapp.ui.categories.CategoriesScreen
 import com.renegatemaster.recipecomposeapp.ui.favorites.FavoritesScreen
 import com.renegatemaster.recipecomposeapp.ui.navigation.BottomNavigation
 import com.renegatemaster.recipecomposeapp.ui.theme.RecipeComposeAppTheme
-import com.renegatemaster.recipecomposeapp.ui.theme.recipesAppTypography
 
 @Composable
 fun RecipesApp() {
-    RecipeComposeAppTheme(
-        typography = recipesAppTypography,
-    ) {
+    RecipeComposeAppTheme {
         var state by remember { mutableStateOf(AppScreens.CATEGORIES) }
         Scaffold(bottomBar = {
             BottomNavigation(
@@ -28,9 +26,13 @@ fun RecipesApp() {
         }
         ) { innerPadding ->
             when (state) {
-                AppScreens.CATEGORIES -> CategoriesScreen(
-                    modifier = Modifier.padding(innerPadding)
-                )
+                AppScreens.CATEGORIES -> {
+                    val categories = RecipesRepositoryStub.getCategories()
+                    CategoriesScreen(
+                        modifier = Modifier.padding(innerPadding),
+                        categories = categories
+                    )
+                }
 
                 AppScreens.FAVORITES -> FavoritesScreen(
                     modifier = Modifier.padding(innerPadding)

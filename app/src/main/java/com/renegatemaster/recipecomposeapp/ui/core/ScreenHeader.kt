@@ -1,6 +1,5 @@
 package com.renegatemaster.recipecomposeapp.ui.core
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,10 +16,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil3.compose.AsyncImage
 import com.renegatemaster.recipecomposeapp.R
 
 @Composable
@@ -31,8 +30,8 @@ fun ScreenHeader(header: String, imageRes: Int) {
             .height(224.dp),
         contentAlignment = Alignment.BottomStart,
     ) {
-        Image(
-            painter = painterResource(id = imageRes),
+        AsyncImage(
+            model = imageRes,
             contentDescription = null,
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop,
@@ -43,7 +42,7 @@ fun ScreenHeader(header: String, imageRes: Int) {
                 .wrapContentHeight()
                 .padding(dimensionResource(R.dimen.basicIndentation)),
             shape = RoundedCornerShape(
-                dimensionResource(R.dimen.basicIndentation)
+                dimensionResource(R.dimen.basicCornerRadius)
             ),
             color = MaterialTheme.colorScheme.background,
         ) {

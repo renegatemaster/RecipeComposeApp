@@ -11,7 +11,6 @@ import com.renegatemaster.recipecomposeapp.R
 import com.renegatemaster.recipecomposeapp.ui.core.ScreenBody
 import com.renegatemaster.recipecomposeapp.ui.core.ScreenHeader
 import com.renegatemaster.recipecomposeapp.ui.theme.RecipeComposeAppTheme
-import com.renegatemaster.recipecomposeapp.ui.theme.recipesAppTypography
 
 @Composable
 fun FavoritesScreen(modifier: Modifier) {
@@ -29,9 +28,7 @@ fun FavoritesScreen(modifier: Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun CategoriesScreenPreview() {
-    RecipeComposeAppTheme(
-        typography = recipesAppTypography,
-    ) {
+    RecipeComposeAppTheme {
         Scaffold() { innerPadding ->
             val modifier = Modifier.padding(innerPadding)
             FavoritesScreen(modifier)
