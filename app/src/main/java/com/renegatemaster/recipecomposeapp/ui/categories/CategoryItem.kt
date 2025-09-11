@@ -7,8 +7,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -30,14 +31,16 @@ fun CategoryItem(
     onClick: () -> Unit,
 ) {
     RecipeComposeAppTheme {
-        Surface(
+        Card(
             modifier = Modifier
                 .height(220.dp)
                 .width(156.dp),
             shape = RoundedCornerShape(
                 size = dimensionResource(R.dimen.halfBasicCornerRadius)
             ),
-            color = MaterialTheme.colorScheme.surface
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.surface
+            ),
         ) {
             Column(
                 modifier = Modifier.fillMaxSize()
@@ -46,7 +49,9 @@ fun CategoryItem(
                     model = imageRes,
                     placeholder = painterResource(R.drawable.img_placeholder),
                     contentDescription = null,
-                    modifier = Modifier.fillMaxWidth().height(130.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(130.dp),
                     contentScale = ContentScale.Crop,
                 )
                 Text(
