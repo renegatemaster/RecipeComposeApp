@@ -23,7 +23,11 @@ import com.renegatemaster.recipecomposeapp.ui.core.ScreenHeader
 import com.renegatemaster.recipecomposeapp.ui.theme.RecipeComposeAppTheme
 
 @Composable
-fun CategoriesScreen(modifier: Modifier, categories: List<CategoryUiModel>) {
+fun CategoriesScreen(
+    modifier: Modifier,
+    categories: List<CategoryUiModel>,
+    onCategoryClick: (Int, String) -> Unit,
+) {
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -50,7 +54,7 @@ fun CategoriesScreen(modifier: Modifier, categories: List<CategoryUiModel>) {
                     imageRes = category.imageUrl,
                     header = category.title,
                     description = category.description,
-                ) { }
+                ) { onCategoryClick (category.id, category.title) }
             }
         }
     }
@@ -65,7 +69,7 @@ fun CategoriesScreenPreview() {
             val categories = RecipesRepositoryStub
                 .getCategories()
                 .map { it.toUiModel() }
-            CategoriesScreen(modifier, categories)
+            CategoriesScreen(modifier, categories) { _, _ -> }
         }
     }
 }
