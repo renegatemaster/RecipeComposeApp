@@ -48,7 +48,7 @@ fun RecipeItem(
             ) {
                 AsyncImage(
                     model = recipe.imageUrl,
-                    placeholder = painterResource(R.drawable.img_error),
+                    placeholder = painterResource(R.drawable.img_placeholder),
                     contentDescription = null,
                     modifier = Modifier
                         .fillMaxWidth()

@@ -13,6 +13,7 @@ import com.renegatemaster.recipecomposeapp.ui.categories.CategoriesScreen
 import com.renegatemaster.recipecomposeapp.ui.categories.model.toUiModel
 import com.renegatemaster.recipecomposeapp.ui.favorites.FavoritesScreen
 import com.renegatemaster.recipecomposeapp.ui.navigation.BottomNavigation
+import com.renegatemaster.recipecomposeapp.ui.recipes.RecipeDetail
 import com.renegatemaster.recipecomposeapp.ui.recipes.RecipesScreen
 import com.renegatemaster.recipecomposeapp.ui.theme.RecipeComposeAppTheme
 
@@ -22,6 +23,7 @@ fun RecipesApp() {
         var state by remember { mutableStateOf(AppScreens.CATEGORIES) }
         var selectedCategoryId by remember { mutableStateOf<Int?>(null) }
         var selectedCategoryTitle by remember { mutableStateOf("") }
+        var selectedRecipeId by remember { mutableStateOf<Int?>(null) }
 
         Scaffold(bottomBar = {
             BottomNavigation(
@@ -53,6 +55,15 @@ fun RecipesApp() {
                 AppScreens.RECIPES -> RecipesScreen(
                     categoryId = selectedCategoryId ?: error("Category ID is required"),
                     categoryTitle = selectedCategoryTitle,
+                    modifier = Modifier.padding(innerPadding),
+                    onRecipeClick = { recipeId: Int ->
+                        selectedRecipeId = recipeId
+                        state = AppScreens.RECIPE_DETAIL
+                    }
+                )
+
+                AppScreens.RECIPE_DETAIL -> RecipeDetail(
+                    recipeId = selectedRecipeId,
                     modifier = Modifier.padding(innerPadding)
                 )
             }
