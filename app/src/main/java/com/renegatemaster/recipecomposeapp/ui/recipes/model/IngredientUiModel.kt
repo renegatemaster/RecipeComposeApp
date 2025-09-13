@@ -1,4 +1,4 @@
-package com.renegatemaster.recipecomposeapp.ui.model
+package com.renegatemaster.recipecomposeapp.ui.recipes.model
 
 import androidx.compose.runtime.Immutable
 import com.renegatemaster.recipecomposeapp.data.model.IngredientDto

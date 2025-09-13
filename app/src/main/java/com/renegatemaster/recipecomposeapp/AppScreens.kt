@@ -2,5 +2,7 @@ package com.renegatemaster.recipecomposeapp
 
 enum class AppScreens(val screenId: Int) {
     CATEGORIES(0),
-    FAVORITES(1)
+    FAVORITES(1),
+    RECIPES(2),
+    RECIPE_DETAIL(3),
 }

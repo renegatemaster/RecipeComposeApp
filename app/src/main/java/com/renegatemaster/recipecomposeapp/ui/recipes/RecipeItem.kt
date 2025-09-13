@@ -1,12 +1,11 @@
-package com.renegatemaster.recipecomposeapp.ui.categories
+package com.renegatemaster.recipecomposeapp.ui.recipes
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -22,21 +21,21 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.renegatemaster.recipecomposeapp.R
+import com.renegatemaster.recipecomposeapp.ui.recipes.model.RecipeUiModel
 import com.renegatemaster.recipecomposeapp.ui.theme.RecipeComposeAppTheme
 
 @Composable
-fun CategoryItem(
-    imageRes: Any,
-    header: String,
-    description: String,
-    onClick: () -> Unit,
+fun RecipeItem(
+    recipe: RecipeUiModel,
+    onRecipeClick: (Int) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     RecipeComposeAppTheme {
         Card(
-            modifier = Modifier
-                .height(220.dp)
-                .width(156.dp)
-                .clickable(onClick = onClick),
+            modifier = modifier
+                .wrapContentHeight()
+                .fillMaxWidth()
+                .clickable { onRecipeClick(recipe.id) },
             shape = RoundedCornerShape(
                 size = dimensionResource(R.dimen.halfBasicCornerRadius)
             ),
@@ -45,36 +44,23 @@ fun CategoryItem(
             ),
         ) {
             Column(
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier.fillMaxWidth().wrapContentHeight()
             ) {
                 AsyncImage(
-                    model = imageRes,
+                    model = recipe.imageUrl,
                     placeholder = painterResource(R.drawable.img_placeholder),
                     contentDescription = null,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(130.dp),
+                        .height(100.dp),
                     contentScale = ContentScale.Crop,
                 )
                 Text(
-                    text = header.uppercase(),
+                    text = recipe.title.uppercase(),
                     modifier = Modifier.padding(dimensionResource(R.dimen.cardHeaderPadding)),
                     color = MaterialTheme.colorScheme.primary,
+                    maxLines = 1,
                     style = MaterialTheme.typography.titleMedium,
-                    textAlign = TextAlign.Center,
-                )
-                Text(
-                    text = description,
-                    maxLines = 3,
-                    modifier = Modifier
-                        .padding(
-                            start = dimensionResource(R.dimen.cardHeaderPadding),
-                            end = dimensionResource(R.dimen.cardHeaderPadding),
-                            bottom = dimensionResource(R.dimen.cardHeaderPadding)
-                        )
-                        .height(50.dp),
-                    color = MaterialTheme.colorScheme.onSecondary,
-                    style = MaterialTheme.typography.bodySmall,
                     textAlign = TextAlign.Start,
                 )
             }
@@ -84,11 +70,18 @@ fun CategoryItem(
 
 @Preview(showBackground = true)
 @Composable
-fun CategoryItemPreview() {
-    val imageRes = R.drawable.img_error
-    CategoryItem(
-        imageRes = imageRes,
-        header = "Бургеры",
-        description = "Рецепты всех популярных видов бургеров",
-    ) {}
+fun RecipeItemPreview() {
+    val recipe = RecipeUiModel(
+        id = 1,
+        title = "Чизбургер",
+        ingredients = emptyList(),
+        method = emptyList(),
+        imageUrl = "",
+        isFavorite = true,
+    )
+    RecipeItem(
+        recipe = recipe,
+        onRecipeClick = {},
+        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+    )
 }
