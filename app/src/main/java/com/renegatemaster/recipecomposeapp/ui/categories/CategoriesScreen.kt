@@ -16,13 +16,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.renegatemaster.recipecomposeapp.R
-import com.renegatemaster.recipecomposeapp.data.model.CategoryDto
 import com.renegatemaster.recipecomposeapp.data.repository.RecipesRepositoryStub
+import com.renegatemaster.recipecomposeapp.ui.categories.model.CategoryUiModel
+import com.renegatemaster.recipecomposeapp.ui.categories.model.toUiModel
 import com.renegatemaster.recipecomposeapp.ui.core.ScreenHeader
 import com.renegatemaster.recipecomposeapp.ui.theme.RecipeComposeAppTheme
 
 @Composable
-fun CategoriesScreen(modifier: Modifier, categories: List<CategoryDto>) {
+fun CategoriesScreen(
+    modifier: Modifier,
+    categories: List<CategoryUiModel>,
+    onCategoryClick: (Int, String) -> Unit,
+) {
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -32,7 +37,6 @@ fun CategoriesScreen(modifier: Modifier, categories: List<CategoryDto>) {
             header = "categories",
             imageRes = R.drawable.bcg_categories
         )
-        //ScreenBody("There is no categories yet")
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
             horizontalArrangement = Arrangement.spacedBy(
@@ -50,7 +54,7 @@ fun CategoriesScreen(modifier: Modifier, categories: List<CategoryDto>) {
                     imageRes = category.imageUrl,
                     header = category.title,
                     description = category.description,
-                ) { }
+                ) { onCategoryClick (category.id, category.title) }
             }
         }
     }
@@ -60,10 +64,12 @@ fun CategoriesScreen(modifier: Modifier, categories: List<CategoryDto>) {
 @Composable
 fun CategoriesScreenPreview() {
     RecipeComposeAppTheme {
-        Scaffold() { innerPadding ->
+        Scaffold { innerPadding ->
             val modifier = Modifier.padding(innerPadding)
-            val categories = RecipesRepositoryStub.getCategories()
-            CategoriesScreen(modifier, categories)
+            val categories = RecipesRepositoryStub
+                .getCategories()
+                .map { it.toUiModel() }
+            CategoriesScreen(modifier, categories) { _, _ -> }
         }
     }
 }
